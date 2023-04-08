@@ -6,6 +6,6 @@ export default function Cell(props) {
         <div 
             id={`cell-${row}-${col}`}
             className={`cell ${isWall ? 'wall' : ''}`}
-        > * </div>
+        ></div>
     )
 }
