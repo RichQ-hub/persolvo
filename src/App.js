@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import './App.css';
+import PathfindingVisualiser from './components/pathfinding-visualiser/PathfindingVisualiser';
 
 const App = () => {
-  
+    
     return (
-        <div>Our app!</div>
+        <div className="app">
+            <PathfindingVisualiser />
+        </div>        
     );
 }
 
