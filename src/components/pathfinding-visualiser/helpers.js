@@ -1,4 +1,7 @@
 
+export const DEFAULT_HEIGHT = 20;
+export const DEFAULT_WIDTH = 30;
+
 export const createGrid = (numRows, numCols) => {
     let grid = [];
     for (let r = 0; r < numRows; r++) {

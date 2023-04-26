@@ -1,0 +1,250 @@
+@font-face {
+    font-family: 'Days One';
+    src: url(../../assets/fonts/DaysOne-Regular.ttf);
+}
+
+/* @font-face {
+    font-family: 'Comfortaa';
+    src: url(../../assets/fonts/DaysOne-Regular.ttf);
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap');
+
+:root {
+    font-size: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comfortaa';
+}
+
+html, body, #root, .app, .app>div {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: #101010;
+}
+
+.pathfinding-visualiser {
+    display: grid;
+    grid-template-columns: clamp(100px, 20%, 170px) 1fr;
+    grid-template-rows: 4.8rem 1fr;
+}
+
+/* HEADER SECTION */
+
+.header {
+    grid-row: 1 / 2;
+    grid-column: 1 / 3;
+
+    background: #1B1421;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.9);
+    padding: 0.6rem 2rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    
+}
+
+.header h1 {
+    font-family: 'Days One';
+    color: white;
+    font-weight: 400;
+    transform: scale(0.9);
+}
+
+.logo {
+    height: 100%;
+    fill: #92F2FF;
+    filter: drop-shadow(1px 2px 1px rgba(43, 161, 147, 0.71));
+}
+
+.github-link {
+    text-decoration: none;
+    margin-left: auto;
+    height: 2.6rem;
+    width: 2.6rem;
+}
+
+.github-logo {
+    cursor: pointer;
+    transition: fill ease-in-out 0.2s, transform ease-in-out 0.2s;
+}
+
+.github-logo:hover {
+    fill: white;
+    transform: scale(1.1);
+}
+
+/* SIDEBAR SECTION */
+
+.sidebar {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+
+    background-color: #1D1A1A;
+    height: auto;
+    max-width: 100%;
+
+    /* transition: transform 350ms ease-in-out; */
+}
+
+/* MAIN SECTION */
+
+/* Description sect */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 1.2rem 2rem;
+}
+
+.algo-desc {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.item-desc {
+    max-width: 50%;
+    color: white;
+    font-weight: 100;
+}
+
+.item-desc p {
+    font-size: 0.9rem;
+}
+
+.divider {
+    width: 2px;
+    height: 80%;
+    background-color: #1B1421;
+    filter: blur(1px) brightness(2);
+    margin-right: 10px;
+}
+
+.algo-select {
+    height: 70%;
+    min-height: 2rem;
+    max-height: 3.6rem;
+    /* Min-content is the width of the longest word inside it. */
+    min-width: min-content; 
+    width: 12rem;
+    position: relative;
+}
+
+.algo-select button {
+    width: 100%;
+    height: 100%;
+
+    vertical-align: middle;
+
+    background-color: #03E9C0;
+    border: none;
+    box-shadow: inset 0 1px 0 #135449, 0 8px 0 #135449;
+    border-radius: 0.3rem;
+
+    position: relative;
+}
+
+.algo-select button:active {
+    top: 4px;
+    background-color: darkcyan;
+    box-shadow: inset 0 1px 0 #135449, 0 4px 0 #135449;
+}
+
+.algo-select::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #5d8c96db;
+    /* filter: brightness(10); */
+    position: absolute;
+    z-index: -1; 
+    padding: 3px;
+    bottom: -12px;
+    left: -3px;
+    border-radius: 0.3rem;
+}
+
+.algo-select p {
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.algo-play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    border-style: none;
+    border-radius: 50%;
+    background-color: #73FD5D; 
+    margin-right: 5%;
+}
+
+.play-svg {
+    height: 40%;
+    width: 40%;
+}
+
+.algo-play, .algo-select button {
+    cursor: pointer;
+}
+
+/* Grid sect */
+
+.grid {
+    display: grid;
+    grid-template-rows: repeat(20, 1fr);
+    grid-template-columns: repeat(30, 1fr);
+
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+
+    background: rgba(229, 187, 255, 0.06);
+    box-shadow: 6px 14px 4px #000000;
+
+    height: 600px;
+    width: 900px;
+
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+}
+
+.cell {
+    /* pointer-events: none; */
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+}
+
+.cell.wall {
+    background-color: bisque;
+}
+
+/* SMALL SCREENS */
+@media (max-width: 1070px) {
+    .sidebar {
+        position: fixed;
+        transform: translateX(-100%);
+    }
+
+    .pathfinding-visualiser {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* LARGE SCREENS */
