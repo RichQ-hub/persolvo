@@ -11,6 +11,11 @@ export const createGrid = (numRows, numCols) => {
         }
         grid.push(currRow);
     }
+
+    // TEST FOR NOW: Hard coding the start and end cells.
+    grid[5][5].isStart = true;
+    grid[DEFAULT_HEIGHT - 5][DEFAULT_WIDTH - 5].isGoal = true;
+
     return grid;
 }
 
@@ -18,6 +23,9 @@ const createCell = (row, col) => {
     return {
         row,
         col,
-        isWall: false
+        isStart: false,
+        isGoal: false,
+        isWall: false,
+        traversalState: "unvisited",
     }
 }

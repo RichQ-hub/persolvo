@@ -234,6 +234,22 @@ main {
     background-color: bisque;
 }
 
+.cell.visited {
+    background-color: #135449;
+}
+
+.cell.path {
+    background-color: yellow;
+}
+
+.cell.start {
+    background-color: greenyellow;
+}
+
+.cell.goal {
+    background-color: red;
+}
+
 /* SMALL SCREENS */
 @media (max-width: 1070px) {
     .sidebar {

@@ -11,7 +11,7 @@ export default function Queue() {
     }
 
     function size() {
-        return queue.length();
+        return queue.length;
     }
 
     function getQueue() {
@@ -22,6 +22,6 @@ export default function Queue() {
         enqueue,
         dequeue,
         size,
-        getQueue
+        getQueue,
     };
 };
