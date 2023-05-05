@@ -1,5 +1,7 @@
 import React from 'react'
 
+const cellTypes = ["Wall", "TreasureChest", "Forest"];
+
 export default function Sidebar() {
 	
 	

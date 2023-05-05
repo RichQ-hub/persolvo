@@ -1,5 +1,5 @@
 import Queue from "../data-structures/Queue"; 
-import findPath from "./findPath";
+import { findPath, createBooleanMatrix, createCellMatrix, isValidCell, isCellWall } from "./helpers"
 
 /**
  * BFS algorithm.
@@ -91,47 +91,3 @@ export default function Bfs(grid, start, goal) {
     }
 }
 
-function createBooleanMatrix(grid) {
-    let rows = grid.length
-    let cols = grid[0].length
-
-    let boolMatrix = [];
-    for (let r = 0; r < rows; r++) {
-        let currRow = [];
-        for (let c = 0; c < cols; c++) {
-            currRow.push(false);
-        }
-        boolMatrix.push(currRow);
-    }
-    return boolMatrix;
-}
-
-function createCellMatrix(grid) {
-    let rows = grid.length
-    let cols = grid[0].length
-
-    let cellMatrix = [];
-    for (let r = 0; r < rows; r++) {
-        let currRow = [];
-        for (let c = 0; c < cols; c++) {
-            currRow.push(null);
-        }
-        cellMatrix.push(currRow);
-    }
-    return cellMatrix;
-}
-
-/**
- * Checks if the current cell is within the bounds of the grid.
- */
-function isValidCell(grid, row, col) {
-    let rows = grid.length
-    let cols = grid[0].length
-
-    return row >= 0 && row < rows && 
-           col >= 0 && col < cols;
-}
-
-function isCellWall(c) {
-    return c.isWall;
-}

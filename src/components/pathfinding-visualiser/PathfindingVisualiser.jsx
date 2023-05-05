@@ -6,6 +6,7 @@ import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid } from './helpers'
 
 // Algorithms
 import Bfs from '../../lib/algorithms/Bfs';
+import Dfs from '../../lib/algorithms/Dfs';
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
@@ -45,6 +46,7 @@ export default function PathfindingVisualiser() {
     }, []);
 
     const handleMouseDown = useCallback((e, row, col) => {
+        console.log(isVisualising)
         if (isVisualising.current === true) {
             return
         }
@@ -83,6 +85,8 @@ export default function PathfindingVisualiser() {
     };
 
     const handlePlayAlgorithm = () => {
+        isVisualising.current = true;
+
         let start = {
             row: 5,
             col: 5,
@@ -94,7 +98,7 @@ export default function PathfindingVisualiser() {
         };
 
         // For now we just run BFS.
-        const { visitedCellsInOrder, path } = Bfs(grid, start, goal);
+        const { visitedCellsInOrder, path } = Dfs(grid, start, goal);
 
         animateAlgorithm(visitedCellsInOrder, path);
     };
@@ -103,6 +107,8 @@ export default function PathfindingVisualiser() {
      * Animate the visited cells in order and then the path.
      */
     const animateAlgorithm = (visitedCellsInOrder, path) => {
+        const speed = 20;
+
         // Animate the visited nodes.
         let delay = 0;
         for (let i = 0; i < visitedCellsInOrder.length; i++) {
@@ -110,8 +116,8 @@ export default function PathfindingVisualiser() {
             let currCell = visitedCellsInOrder[i];
             setTimeout(() => {
                 updateTraversalState(currCell, "visited");
-            }, 50 * i);
-            delay += 50;
+            }, speed * i);
+            delay += speed;
         }
 
         // Visualise the path after the nodes have been visited (hence why we delay it with setTimeout).
@@ -120,7 +126,12 @@ export default function PathfindingVisualiser() {
                 let currCell = path[i];
                 setTimeout(() => {
                     updateTraversalState(currCell, "path")
-                }, 50 * i);
+
+                    // After all the nodes are traversed, we can edit the board again.
+                    if (i === path.length - 1) {
+                        isVisualising.current = false;
+                    }
+                }, speed * i);
             }
         }, delay);
     };
@@ -153,11 +164,8 @@ export default function PathfindingVisualiser() {
                     </div>
 
                     {/* Play Button */}
-                    <button className='algo-play'>
-                        <PlayButton 
-                            className='play-svg'
-                            onClick={handlePlayAlgorithm}
-                        />
+                    <button className='algo-play' onClick={handlePlayAlgorithm}>
+                        <PlayButton className='play-svg'/>
                     </button>
                 </section>
 
@@ -193,9 +201,3 @@ export default function PathfindingVisualiser() {
         </div>
     )
 }
-
-// const toggleWall = (grid, row, col) => {
-//     const newGrid = grid.slice();
-//     newGrid[row][col].isWall = true;
-//     return newGrid;
-// };

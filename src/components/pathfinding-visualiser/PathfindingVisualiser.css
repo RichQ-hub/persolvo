@@ -220,14 +220,14 @@ main {
     height: 600px;
     width: 900px;
 
-    border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
+    border-bottom: 1px solid rgba(245, 244, 255, 0.336);
+    border-left: 1px solid rgba(245, 244, 255, 0.336);
 }
 
 .cell {
     /* pointer-events: none; */
-    border-top: 1px solid gray;
-    border-right: 1px solid gray;
+    border-top: 1px solid rgba(245, 244, 255, 0.336);
+    border-right: 1px solid rgba(245, 244, 255, 0.336);
 }
 
 .cell.wall {
@@ -235,7 +235,7 @@ main {
 }
 
 .cell.visited {
-    background-color: #135449;
+    background-color: #00bedabf;
 }
 
 .cell.path {
