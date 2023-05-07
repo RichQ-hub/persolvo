@@ -57,6 +57,24 @@ export function createCellMatrix(grid) {
     return cellMatrix;
 }
 
+/**
+ * Helper to create an array of integers, all initially set to Infinity.
+ */
+export function createIntegerArray(grid) {
+    let rows = grid.length
+    let cols = grid[0].length
+
+    let integerMatrix = [];
+    for (let r = 0; r < rows; r++) {
+        let currRow = [];
+        for (let c = 0; c < cols; c++) {
+            currRow.push(Infinity);
+        }
+        integerMatrix.push(currRow);
+    }
+    return integerMatrix;
+}
+
 // =============================================================================
 // Etc.
 // =============================================================================

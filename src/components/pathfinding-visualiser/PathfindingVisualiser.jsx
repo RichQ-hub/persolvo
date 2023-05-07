@@ -14,6 +14,9 @@ import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg'
 // Styles.
 import './PathfindingVisualiser.css'
 
+// TEST (PQueue):
+import PriorityQueue from '../../lib/data-structures/PriorityQueue';
+
 export default function PathfindingVisualiser() {
     const [grid, setGrid] = useState(createGrid(DEFAULT_HEIGHT, DEFAULT_WIDTH));
 
@@ -46,7 +49,6 @@ export default function PathfindingVisualiser() {
     }, []);
 
     const handleMouseDown = useCallback((e, row, col) => {
-        console.log(isVisualising)
         if (isVisualising.current === true) {
             return
         }
@@ -87,20 +89,21 @@ export default function PathfindingVisualiser() {
     const handlePlayAlgorithm = () => {
         isVisualising.current = true;
 
-        let start = {
-            row: 5,
-            col: 5,
-        };
+        // let start = {
+        //     row: 5,
+        //     col: 5,
+        // };
 
-        let goal = {
-            row: DEFAULT_HEIGHT - 5,
-            col: DEFAULT_WIDTH - 5,
-        };
+        // let goal = {
+        //     row: DEFAULT_HEIGHT - 5,
+        //     col: DEFAULT_WIDTH - 5,
+        // };
 
         // For now we just run BFS.
         const { visitedCellsInOrder, path } = Dfs(grid, start, goal);
 
         animateAlgorithm(visitedCellsInOrder, path);
+
     };
 
     /**
