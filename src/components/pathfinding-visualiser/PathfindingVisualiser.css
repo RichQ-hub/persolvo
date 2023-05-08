@@ -250,6 +250,10 @@ main {
     background-color: red;
 }
 
+.cell.forest {
+    background-color: purple;
+}
+
 /* SMALL SCREENS */
 @media (max-width: 1070px) {
     .sidebar {

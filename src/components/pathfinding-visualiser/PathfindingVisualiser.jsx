@@ -7,6 +7,7 @@ import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid } from './helpers'
 // Algorithms
 import Bfs from '../../lib/algorithms/Bfs';
 import Dfs from '../../lib/algorithms/Dfs';
+import Dijkstra from '../../lib/algorithms/Dijkstra';
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
@@ -14,14 +15,12 @@ import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg'
 // Styles.
 import './PathfindingVisualiser.css'
 
-// TEST (PQueue):
-import PriorityQueue from '../../lib/data-structures/PriorityQueue';
-
 export default function PathfindingVisualiser() {
     const [grid, setGrid] = useState(createGrid(DEFAULT_HEIGHT, DEFAULT_WIDTH));
 
     const isMousePressed = useRef(false); // Changing refs won't trigger re-render.
     const isVisualising = useRef(false);
+    const [selectedCellType, setSelectedCellType] = useState("forest");
 
     /* MOUSE EVENTS -------------------------------------------------------------------- */
 
@@ -40,13 +39,13 @@ export default function PathfindingVisualiser() {
     // becuase if we try to update the cell inside the handler functions, we have to include
     // the grid as a dependency in the useCallBack hook. This breaks the memoisation for 
     // rendering each cell.
-    const toggleWall = useCallback((row, col) => {
+    const toggleCellType = useCallback((row, col) => {
         setGrid((prevGrid) => {
             const newGrid = prevGrid.slice();
-            newGrid[row][col].isWall = true;
+            newGrid[row][col].cellType = selectedCellType;
             return newGrid;
         });
-    }, []);
+    }, [selectedCellType]);
 
     const handleMouseDown = useCallback((e, row, col) => {
         if (isVisualising.current === true) {
@@ -59,9 +58,9 @@ export default function PathfindingVisualiser() {
         // Toggle the wall.
         // const newGrid = toggleWall(grid, row, col);
         // setGrid(newGrid);
-        toggleWall(row, col);
+        toggleCellType(row, col);
 
-    }, [toggleWall]);
+    }, [toggleCellType]);
 
     const handleMouseUp = useCallback(() => {
         isMousePressed.current = false;
@@ -72,9 +71,9 @@ export default function PathfindingVisualiser() {
             // Toggle the wall.
             // const newGrid = toggleWall(grid, row, col);
             // setGrid(newGrid);
-            toggleWall(row, col);
+            toggleCellType(row, col);
         }
-    }, [toggleWall]);
+    }, [toggleCellType]);
 
     /* GRID EVENTS -------------------------------------------------------------------- */
 
@@ -89,18 +88,18 @@ export default function PathfindingVisualiser() {
     const handlePlayAlgorithm = () => {
         isVisualising.current = true;
 
-        // let start = {
-        //     row: 5,
-        //     col: 5,
-        // };
+        let start = {
+            row: 5,
+            col: 5,
+        };
 
-        // let goal = {
-        //     row: DEFAULT_HEIGHT - 5,
-        //     col: DEFAULT_WIDTH - 5,
-        // };
+        let goal = {
+            row: DEFAULT_HEIGHT - 5,
+            col: DEFAULT_WIDTH - 5,
+        };
 
         // For now we just run BFS.
-        const { visitedCellsInOrder, path } = Dfs(grid, start, goal);
+        const { visitedCellsInOrder, path } = Dijkstra(grid, start, goal);
 
         animateAlgorithm(visitedCellsInOrder, path);
 
@@ -177,15 +176,13 @@ export default function PathfindingVisualiser() {
                     {grid.map((row) => {
                         return (
                             row.map((cell, cellIdx) => {
-                                const { row, col, isWall, traversalState, isStart, isGoal } = cell;
+                                const { row, col, cellType, traversalState } = cell;
                                 return (
                                     <Cell
                                         key={cellIdx}
                                         row={row}
                                         col={col}
-                                        isWall={isWall}
-                                        isStart={isStart}
-                                        isGoal={isGoal}
+                                        cellType={cellType}
                                         traversalState={traversalState}
                                         onMouseDown={handleMouseDown}
                                         onMouseUp={handleMouseUp}

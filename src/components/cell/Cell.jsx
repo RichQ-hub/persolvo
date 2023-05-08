@@ -4,9 +4,7 @@ const Cell = memo((props) => {
     const { 
         row, 
         col, 
-        isWall, 
-        isStart,
-        isGoal,
+        cellType,
         onMouseDown, 
         onMouseUp, 
         onMouseEnter, 
@@ -16,7 +14,7 @@ const Cell = memo((props) => {
     return (
         <div 
             id={`cell-${row}-${col}`}
-            className={`cell ${isWall ? 'wall' : ''} ${traversalState} ${isStart ? 'start' : ''} ${isGoal ? 'goal' : ''}`}
+            className={`cell ${cellType ? cellType : ''} ${traversalState}`}
             onMouseDown={(e) => onMouseDown(e, row, col)}
             onMouseUp={() => onMouseUp()}
             onMouseEnter={() => onMouseEnter(row, col)}

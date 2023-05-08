@@ -13,8 +13,8 @@ export const createGrid = (numRows, numCols) => {
     }
 
     // TEST FOR NOW: Hard coding the start and end cells.
-    grid[5][5].isStart = true;
-    grid[DEFAULT_HEIGHT - 5][DEFAULT_WIDTH - 5].isGoal = true;
+    grid[5][5].cellType = "start";
+    grid[DEFAULT_HEIGHT - 5][DEFAULT_WIDTH - 5].cellType = "goal";
 
     return grid;
 }
@@ -23,9 +23,7 @@ const createCell = (row, col) => {
     return {
         row,
         col,
-        isStart: false,
-        isGoal: false,
-        isWall: false,
+        cellType: undefined,
         traversalState: "unvisited",
     }
 }

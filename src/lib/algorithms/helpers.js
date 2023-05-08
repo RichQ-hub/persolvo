@@ -58,7 +58,7 @@ export function createCellMatrix(grid) {
 }
 
 /**
- * Helper to create an array of integers, all initially set to Infinity.
+ * Helper to create an array of integers, all initially set to 0.
  */
 export function createIntegerArray(grid) {
     let rows = grid.length
@@ -68,7 +68,7 @@ export function createIntegerArray(grid) {
     for (let r = 0; r < rows; r++) {
         let currRow = [];
         for (let c = 0; c < cols; c++) {
-            currRow.push(Infinity);
+            currRow.push(0);
         }
         integerMatrix.push(currRow);
     }
@@ -91,5 +91,9 @@ export function isValidCell(grid, row, col) {
 }
 
 export function isCellWall(c) {
-    return c.isWall;
+    return c.cellType === "wall";
+}
+
+export function isCellEqual(c1, c2) {
+    return c1.row === c2.row && c1.col === c2.col;
 }
