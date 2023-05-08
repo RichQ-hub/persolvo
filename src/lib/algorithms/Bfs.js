@@ -30,6 +30,7 @@ export default function Bfs(grid, start, goal) {
     const predMatrix = createCellMatrix(grid);
 
     // Mark the starting cell as visited and add it to the queue.
+    visited[startCell.row][startCell.col] = true;
     queue.enqueue(startCell);
 
     // These arrays are used to get row and column numbers of the 4 adjacent
@@ -78,12 +79,12 @@ export default function Bfs(grid, start, goal) {
         }
     }
 
-    let path = null;
+    let path = [];
     if (found) {
         path = findPath(startCell, goalCell, predMatrix);
     }
 
-    console.log(visitedCellsInOrder);
+    console.log(visitedCellsInOrder)
 
     return {
         visitedCellsInOrder,

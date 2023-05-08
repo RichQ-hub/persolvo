@@ -10,6 +10,8 @@ import {
     isCellEqual
 } from "./helpers"
 
+// MIGHT STILL NOT WORK
+
 export default function Dijkstra(grid, startCoords, goalCoords) {
     let visitedCellsInOrder = [];
 
@@ -46,22 +48,23 @@ export default function Dijkstra(grid, startCoords, goalCoords) {
         for (let c = 0; c < COLS; c++) {
             if (!isCellEqual(grid[r][c], startCell)) {
                 dist[r][c] = Infinity;
-
-                // Add it to the pqueue.
-                pQueue.insert(grid[r][c], Infinity);
             }
         }
     }
 
     let found = false;
 
-    const rowNum = [-1, 0, 1, 0];
-    const colNum = [0, 1, 0, -1];
+    const rowNum = [-1, 0, 0, 1];
+    const colNum = [0, -1, 1, 0];
 
     // So long as there are nodes in the pqueue.
     while (!found && !pQueue.isEmpty()) {
         // Remove the cell with the smallest dist[][] value from the pqueue.
         let currCell = pQueue.remove();
+
+        // console.log(currCell);
+        // console.log(dist[currCell.row][currCell.col])
+
 
         // Mark the current node as visited.
         visited[currCell.row][currCell.col] = true;
@@ -108,7 +111,7 @@ export default function Dijkstra(grid, startCoords, goalCoords) {
         }
     }
 
-    let path = null;
+    let path = [];
     if (found) {
         path = findPath(startCell, goalCell, predMatrix);
     }

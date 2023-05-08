@@ -109,7 +109,7 @@ export default function PathfindingVisualiser() {
      * Animate the visited cells in order and then the path.
      */
     const animateAlgorithm = (visitedCellsInOrder, path) => {
-        const speed = 20;
+        const speed = 40;
 
         // Animate the visited nodes.
         let delay = 0;
