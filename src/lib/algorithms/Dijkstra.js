@@ -4,6 +4,7 @@ import {
     createIntegerArray, 
     createCellMatrix, 
     createBooleanMatrix, 
+    getWeights,
     isValidCell, 
     isCellWall, 
     isCellEqual
@@ -117,26 +118,3 @@ export default function Dijkstra(grid, startCoords, goalCoords) {
         path,
     }
 }
-
-function getWeights(grid) {
-    let rows = grid.length
-    let cols = grid[0].length
-
-    let weights = [];
-    for (let r = 0; r < rows; r++) {
-        let currRow = [];
-        for (let c = 0; c < cols; c++) {
-            if (grid[r][c].cellType === "forest") {
-                // If a cell is a forest cell, set its weight to 5.
-                currRow.push(5);
-            } else {
-                // Set a default weight of 1.
-                currRow.push(1);
-            }
-        }
-        weights.push(currRow);
-    }
-    return weights;
-}
-
-
