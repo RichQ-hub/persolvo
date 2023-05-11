@@ -10,7 +10,7 @@ import {
     isCellEqual
 } from "./helpers"
 
-// MIGHT STILL NOT WORK
+// MIGHT STILL NOT WORK: It expands the frontier weirdly.
 
 export default function Dijkstra(grid, startCoords, goalCoords) {
     let visitedCellsInOrder = [];
@@ -41,6 +41,9 @@ export default function Dijkstra(grid, startCoords, goalCoords) {
     // Add the source into the priority queue.
     pQueue.insert(startCell, 0);
 
+    // Mark the source as visited.
+    visited[startCell.row][startCell.col] = true;
+
     // For every cell that is not the start, we set its distance to infinity.
     const ROWS = grid.length
     const COLS = grid[0].length
@@ -61,10 +64,6 @@ export default function Dijkstra(grid, startCoords, goalCoords) {
     while (!found && !pQueue.isEmpty()) {
         // Remove the cell with the smallest dist[][] value from the pqueue.
         let currCell = pQueue.remove();
-
-        // console.log(currCell);
-        // console.log(dist[currCell.row][currCell.col])
-
 
         // Mark the current node as visited.
         visited[currCell.row][currCell.col] = true;

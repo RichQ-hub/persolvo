@@ -8,6 +8,7 @@ import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid } from './helpers'
 import Bfs from '../../lib/algorithms/Bfs';
 import Dfs from '../../lib/algorithms/Dfs';
 import Dijkstra from '../../lib/algorithms/Dijkstra';
+import GreedyBestFirst from '../../lib/algorithms/GreedyBestFirst';
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
@@ -20,7 +21,7 @@ export default function PathfindingVisualiser() {
 
     const isMousePressed = useRef(false); // Changing refs won't trigger re-render.
     const isVisualising = useRef(false);
-    const [selectedCellType, setSelectedCellType] = useState("forest");
+    const [selectedCellType, setSelectedCellType] = useState("wall");
 
     /* MOUSE EVENTS -------------------------------------------------------------------- */
 
@@ -99,7 +100,7 @@ export default function PathfindingVisualiser() {
         };
 
         // For now we just run BFS.
-        const { visitedCellsInOrder, path } = Dijkstra(grid, start, goal);
+        const { visitedCellsInOrder, path } = GreedyBestFirst(grid, start, goal);
 
         animateAlgorithm(visitedCellsInOrder, path);
 
