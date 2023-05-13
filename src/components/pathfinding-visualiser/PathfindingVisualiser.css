@@ -136,7 +136,7 @@ main {
 
 .algo-select {
     height: 70%;
-    min-height: 2rem;
+    min-height: 3rem;
     max-height: 3.6rem;
     /* Min-content is the width of the longest word inside it. */
     min-width: min-content; 
@@ -253,6 +253,49 @@ main {
 .cell.forest {
     background-color: purple;
 }
+
+/* Clear Section */
+.clear-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;    
+}
+
+.btn-clear-path, .btn-clear-grid {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 2rem;
+    border: 2px solid #e52727;
+
+    min-height: 2.4rem;
+    max-height: 3.6rem;
+    /* Min-content is the width of the longest word inside it. */
+    min-width: min-content; 
+    width: 10rem;
+
+    transition: background-color ease-in-out 0.2s;
+
+}
+
+.btn-clear-path > span, .btn-clear-grid > span {
+    font-weight: bolder;
+    color: #e52727;
+    transition: color ease-in-out 0.2s;
+}
+
+.btn-clear-path:hover, .btn-clear-grid:hover {
+    background-color: #e52727;
+}
+
+.btn-clear-path:hover > span, .btn-clear-grid:hover > span {
+    color: white;
+}
+
 
 /* SMALL SCREENS */
 @media (max-width: 1070px) {

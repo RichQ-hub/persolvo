@@ -2,7 +2,9 @@ import React, {useCallback, useState, useRef} from 'react'
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import Cell from '../cell/Cell';
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid } from './helpers'
+
+// Helpers
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid, clearPath, clearGrid } from './helpers'
 
 // Algorithms
 import Bfs from '../../lib/algorithms/Bfs';
@@ -91,6 +93,9 @@ export default function PathfindingVisualiser() {
     };
 
     const handlePlayAlgorithm = () => {
+        // Clear path before visualising.
+        handleClearPath();
+        
         isVisualising.current = true;
 
         let start = {
@@ -141,6 +146,25 @@ export default function PathfindingVisualiser() {
                 }, speed * i);
             }
         }, delay);
+    };
+
+    /* CLEAR EVENTS -------------------------------------------------------------------- */
+    const handleClearPath = () => {
+        if (isVisualising.current === true) {
+            return
+        }
+        setGrid((prevGrid) => {
+            return clearPath(prevGrid);
+        });
+    };
+
+    const handleClearGrid = () => {
+        if (isVisualising.current === true) {
+            return
+        }
+        setGrid((prevGrid) => {
+            return clearGrid(prevGrid);
+        });
     };
 
     return (
@@ -200,6 +224,15 @@ export default function PathfindingVisualiser() {
                 </div>
 
                 {/* Clear Section */}
+                <section className='clear-section'>
+                    <div className='btn-clear-path' onMouseDown={handleClearPath}>
+                        <span>Clear Path</span>
+                    </div>
+
+                    <div className='btn-clear-grid' onMouseDown={handleClearGrid}>
+                        <span>Clear Grid</span>
+                    </div>
+                </section>
 
             </main>
 

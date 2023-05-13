@@ -27,3 +27,32 @@ const createCell = (row, col) => {
         traversalState: "unvisited",
     }
 }
+
+/**
+ * Clears all cell types and traversal states, except for the start and goal cells.
+ */
+export const clearGrid = (grid) => {
+    const newGrid = grid.slice();
+    for (let r = 0; r < DEFAULT_HEIGHT; r++) {
+        for (let c = 0; c < DEFAULT_WIDTH; c++) {
+            if (newGrid[r][c].cellType !== "start" && newGrid[r][c].cellType !== "goal") {
+                newGrid[r][c].traversalState = "unvisited";
+                newGrid[r][c].cellType = undefined;
+            }
+        }
+    }
+    return newGrid;
+}
+
+/**
+ * Clears cell traversal states.
+ */
+export const clearPath = (grid) => {
+    const newGrid = grid.slice();
+    for (let r = 0; r < DEFAULT_HEIGHT; r++) {
+        for (let c = 0; c < DEFAULT_WIDTH; c++) {
+            newGrid[r][c].traversalState = "unvisited";
+        }
+    }
+    return newGrid;
+}
