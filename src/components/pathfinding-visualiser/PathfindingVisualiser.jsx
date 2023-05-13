@@ -9,6 +9,10 @@ import Bfs from '../../lib/algorithms/Bfs';
 import Dfs from '../../lib/algorithms/Dfs';
 import Dijkstra from '../../lib/algorithms/Dijkstra';
 import GreedyBestFirst from '../../lib/algorithms/GreedyBestFirst';
+import AStar from '../../lib/algorithms/AStar';
+
+// TEST
+import PriorityQueue2 from '../../lib/data-structures/PriorityQueue2';
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
