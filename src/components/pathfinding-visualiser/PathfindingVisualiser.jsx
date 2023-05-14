@@ -2,29 +2,21 @@ import React, {useCallback, useState, useRef} from 'react'
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import Cell from '../cell/Cell';
+import DropdownButton from '../dropdown/DropdownButton';
+import DropdownMenu from '../dropdown/DropdownMenu';
 
 // Helpers
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid, clearPath, clearGrid } from './helpers'
-
-// Algorithms
-import Bfs from '../../lib/algorithms/Bfs';
-import Dfs from '../../lib/algorithms/Dfs';
-import Dijkstra from '../../lib/algorithms/Dijkstra';
-import GreedyBestFirst from '../../lib/algorithms/GreedyBestFirst';
-import AStar from '../../lib/algorithms/AStar';
-
-// TEST
-import PriorityQueue2 from '../../lib/data-structures/PriorityQueue2';
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid, clearPath, clearGrid, runAlgorithm } from './helpers'
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
 
 export default function PathfindingVisualiser() {
     const [grid, setGrid] = useState(createGrid(DEFAULT_HEIGHT, DEFAULT_WIDTH));
-
     const isMousePressed = useRef(false); // Changing refs won't trigger re-render.
     const isVisualising = useRef(false);
     const [selectedCellType, setSelectedCellType] = useState("wall");
+    const [selectedAlgorithm, setSelectedAlgorithm] = useState("Select Algorithm");
 
     /* MOUSE EVENTS -------------------------------------------------------------------- */
 
@@ -90,6 +82,17 @@ export default function PathfindingVisualiser() {
     };
 
     const handlePlayAlgorithm = () => {
+        // Cannot visualise another algorithm while it is still running.
+        if (isVisualising.current === true) {
+            return
+        }
+
+        // If no algorithm selected.
+        if (selectedAlgorithm === "Select Algorithm") {
+            alert("Choose an Algorithm!")
+            return
+        }
+
         // Clear path before visualising.
         handleClearPath();
         
@@ -106,7 +109,7 @@ export default function PathfindingVisualiser() {
         };
 
         // For now we just run BFS.
-        const { visitedCellsInOrder, path } = GreedyBestFirst(grid, start, goal);
+        const { visitedCellsInOrder, path } = runAlgorithm(selectedAlgorithm, grid, start, goal);
 
         animateAlgorithm(visitedCellsInOrder, path);
 
@@ -146,6 +149,7 @@ export default function PathfindingVisualiser() {
     };
 
     /* CLEAR EVENTS -------------------------------------------------------------------- */
+
     const handleClearPath = () => {
         if (isVisualising.current === true) {
             return
@@ -163,6 +167,12 @@ export default function PathfindingVisualiser() {
             return clearGrid(prevGrid);
         });
     };
+
+    /* OPTION EVENTS -------------------------------------------------------------------- */
+
+    const handleChangeAlgorithm = (algorithm) => {
+        setSelectedAlgorithm(algorithm);
+    }
 
     return (
         <div className='pathfinding-visualiser'>
@@ -185,11 +195,15 @@ export default function PathfindingVisualiser() {
                     <div className='divider'></div>
                     
                     {/* Algorithm Select Button */}
-                    <div className='algo-select'>
+
+                    {/* <div className='algo-select'>
                         <button>
                             <p>Algorithm</p>
                         </button>
-                    </div>
+                    </div> */}
+
+                    {/* New Algorithm Select Button */}
+                    <DropdownButton selectedAlgorithm={selectedAlgorithm} handleChangeAlgorithm={handleChangeAlgorithm}/>
 
                     {/* Play Button */}
                     <button className='algo-play' onClick={handlePlayAlgorithm}>

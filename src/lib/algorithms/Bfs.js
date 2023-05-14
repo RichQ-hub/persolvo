@@ -84,8 +84,6 @@ export default function Bfs(grid, start, goal) {
         path = findPath(startCell, goalCell, predMatrix);
     }
 
-    console.log(visitedCellsInOrder)
-
     return {
         visitedCellsInOrder,
         path,

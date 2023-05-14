@@ -1,6 +1,33 @@
+// Algorithms
+import Bfs from '../../lib/algorithms/Bfs';
+import Dfs from '../../lib/algorithms/Dfs';
+import Dijkstra from '../../lib/algorithms/Dijkstra';
+import GreedyBestFirst from '../../lib/algorithms/GreedyBestFirst';
+import AStar from '../../lib/algorithms/AStar';
 
 export const DEFAULT_HEIGHT = 20;
 export const DEFAULT_WIDTH = 30;
+
+/**
+ * Runs the given algorithm.
+ * @param {string} algorithm 
+ */
+export const runAlgorithm = (algorithm, grid, start, goal) => {
+    switch (algorithm) {
+        case "BFS":
+            return Bfs(grid, start, goal);
+        case "DFS":
+            return Dfs(grid, start, goal);
+        case "Dijkstra":
+            return Dijkstra(grid, start, goal);
+        case "Greedy Best First Search":
+            return GreedyBestFirst(grid, start, goal);
+        case "A*":
+            return AStar(grid, start, goal);
+        default:
+            return Bfs(grid, start, goal);
+    }
+}
 
 export const createGrid = (numRows, numCols) => {
     let grid = [];
