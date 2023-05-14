@@ -297,6 +297,7 @@ main {
 }
 
 .btn-clear-path, .btn-clear-grid {
+  background: none;
   cursor: pointer;
   display: flex;
   justify-content: center;

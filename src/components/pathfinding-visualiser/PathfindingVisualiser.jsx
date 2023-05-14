@@ -236,13 +236,13 @@ export default function PathfindingVisualiser() {
 
                 {/* Clear Section */}
                 <section className='clear-section'>
-                    <div className='btn-clear-path' onMouseDown={handleClearPath}>
+                    <button className='btn-clear-path' onMouseDown={handleClearPath}>
                         <span>Clear Path</span>
-                    </div>
+                    </button>
 
-                    <div className='btn-clear-grid' onMouseDown={handleClearGrid}>
+                    <button className='btn-clear-grid' onMouseDown={handleClearGrid}>
                         <span>Clear Grid</span>
-                    </div>
+                    </button>
                 </section>
 
             </main>
