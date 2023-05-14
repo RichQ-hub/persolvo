@@ -19,9 +19,6 @@ import PriorityQueue2 from '../../lib/data-structures/PriorityQueue2';
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
 
-// Styles.
-import './PathfindingVisualiser.css'
-
 export default function PathfindingVisualiser() {
     const [grid, setGrid] = useState(createGrid(DEFAULT_HEIGHT, DEFAULT_WIDTH));
 
