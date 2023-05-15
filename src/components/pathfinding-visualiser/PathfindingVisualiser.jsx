@@ -51,13 +51,20 @@ export default function PathfindingVisualiser() {
             // Only one start and goal cells should exist, so we remove the previous start/goal
             // when updating their positions. 
             if (selectedCellType === "start") {
-                console.log(`${startCell.current.row} ${startCell.current.col}`)
                 newGrid[startCell.current.row][startCell.current.col].cellType = undefined;
+                newGrid[startCell.current.row][startCell.current.col].traversalState = "unvisited";
             } else if (selectedCellType === "goal") {
                 newGrid[goalCell.current.row][goalCell.current.col].cellType = undefined;
+                newGrid[goalCell.current.row][goalCell.current.col].traversalState = "unvisited";
+            }
+            // Our selected cell is not a start/goal cell. Thus, we also cannot add the selected
+            // cell onto a start/goal cell.
+
+            let currCellType = newGrid[row][col].cellType;
+            if (currCellType !== "start" && currCellType !== "goal") {
+                newGrid[row][col].cellType = selectedCellType;
             }
 
-            newGrid[row][col].cellType = selectedCellType;
             return newGrid;
         });
     }, [selectedCellType]);
