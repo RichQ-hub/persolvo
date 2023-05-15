@@ -174,13 +174,17 @@ export default function PathfindingVisualiser() {
         setSelectedAlgorithm(algorithm);
     }
 
+    const handleChangeCellType = (cellType) => {
+        setSelectedCellType(cellType);
+    }
+
     return (
         <div className='pathfinding-visualiser'>
             {/* Header Section */}
             <Header />
 
             {/* Sidebar Section */}
-            <Sidebar />
+            <Sidebar handleChangeCellType={handleChangeCellType} />
 
             <main>
                 {/* Top Description Section */}
@@ -203,7 +207,7 @@ export default function PathfindingVisualiser() {
                     </div> */}
 
                     {/* New Algorithm Select Button */}
-                    <DropdownButton selectedAlgorithm={selectedAlgorithm} handleChangeAlgorithm={handleChangeAlgorithm}/>
+                    <DropdownButton selectedAlgorithm={selectedAlgorithm} handleChangeAlgorithm={handleChangeAlgorithm} />
 
                     {/* Play Button */}
                     <button className='algo-play' onClick={handlePlayAlgorithm}>
