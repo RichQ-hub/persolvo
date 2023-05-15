@@ -53,9 +53,21 @@ export default function PathfindingVisualiser() {
             if (selectedCellType === "start") {
                 newGrid[startCell.current.row][startCell.current.col].cellType = undefined;
                 newGrid[startCell.current.row][startCell.current.col].traversalState = "unvisited";
+
+                // Update coords of start cell.
+                startCell.current = {
+                    row,
+                    col,
+                };
             } else if (selectedCellType === "goal") {
                 newGrid[goalCell.current.row][goalCell.current.col].cellType = undefined;
                 newGrid[goalCell.current.row][goalCell.current.col].traversalState = "unvisited";
+
+                // Update coords of goal cell.
+                goalCell.current = {
+                    row,
+                    col,
+                };
             }
             // Our selected cell is not a start/goal cell. Thus, we also cannot add the selected
             // cell onto a start/goal cell.
@@ -76,7 +88,7 @@ export default function PathfindingVisualiser() {
     // function.
     //      Is there a better way? - IDK
 
-    const handleMouseDown = useCallback(async (e, row, col) => {
+    const handleMouseDown = useCallback((e, row, col) => {
         if (isVisualising.current === true) {
             return
         }
@@ -85,35 +97,20 @@ export default function PathfindingVisualiser() {
         isMousePressed.current = true;
 
         // Toggle the cell type. We use await to ensure this function executes before the below code.
-        await toggleCellType(row, col);
+        toggleCellType(row, col);
 
         // Update coords of where the new start/goal cell is, since we can only have 1 of each on
         // the board at any given time.
-        if (selectedCellType === "start") {
-            // Update coords of start cell.
-            startCell.current = {
-                row,
-                col,
-            };
-        } else if (selectedCellType === "goal") {
-            // Update coords of goal cell.
-            goalCell.current = {
-                row,
-                col,
-            };
-        }
 
-    }, [toggleCellType, selectedCellType]);
+    }, [toggleCellType]);
 
     const handleMouseUp = useCallback(() => {
         isMousePressed.current = false;
     }, []);
 
-    const handleMouseEnter = useCallback((row, col) => {
+    const handleMouseEnter = useCallback(async (row, col) => {
         if (isMousePressed.current) {
-            // Toggle the wall.
-            // const newGrid = toggleWall(grid, row, col);
-            // setGrid(newGrid);
+            // Toggle the cell.
             toggleCellType(row, col);
         }
     }, [toggleCellType]);
@@ -134,7 +131,7 @@ export default function PathfindingVisualiser() {
             return
         }
 
-        // If no algorithm selected.
+        // Check if no algorithm selected.
         if (selectedAlgorithm === "Select Algorithm") {
             alert("Choose an Algorithm!")
             return
