@@ -8,27 +8,55 @@ import { ReactComponent as StartIcon } from '../../assets/icons/start.svg';
 import { ReactComponent as GoalIcon } from '../../assets/icons/finish.svg';
 import { ReactComponent as WallIcon } from '../../assets/icons/wall.svg';
 import { ReactComponent as ChestIcon } from '../../assets/icons/treasure.svg';
-import { ReactComponent as ForesIcon } from '../../assets/icons/forest.svg';
-
-const cellTypes = ["Wall", "TreasureChest", "Forest"];
+import { ReactComponent as ForestIcon } from '../../assets/icons/forest.svg';
 
 export default function Sidebar(props) {
-	const { handleChangeCellType } = props;
+	const { handleChangeCellType, selectedItem } = props;
 	return (
 		<aside className='sidebar'>
 			<SidebarSection title="Eraser">
-				<SidebarItem icon={<EraserIcon />} />
+				<SidebarItem 
+					name="eraser" 
+					icon={<EraserIcon />}
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
 			</SidebarSection>
 
 			<SidebarSection title="Start / End">
-				<SidebarItem icon={<StartIcon />} />
-				<SidebarItem icon={<GoalIcon />} />
+				<SidebarItem 
+					name="start" 
+					icon={<StartIcon />} 
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
+				<SidebarItem 
+					name="goal" 
+					icon={<GoalIcon />}
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
 			</SidebarSection>
 
 			<SidebarSection title="Cell Types">
-				<SidebarItem icon={<WallIcon />} />
-				<SidebarItem icon={<ChestIcon />} />
-				<SidebarItem icon={<ForesIcon />} />
+				<SidebarItem 
+					name="wall" 
+					icon={<WallIcon />}
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
+				<SidebarItem 
+					name="chest" 
+					icon={<ChestIcon />}
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
+				<SidebarItem 
+					name="forest" 
+					icon={<ForestIcon />}
+					selectedItem={selectedItem}
+					handleChangeCellType={handleChangeCellType}
+				/>
 			</SidebarSection>
 
 		</aside>

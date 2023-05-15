@@ -3,7 +3,6 @@ import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import Cell from '../cell/Cell';
 import DropdownButton from '../dropdown/DropdownButton';
-import DropdownMenu from '../dropdown/DropdownMenu';
 
 // Helpers
 import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid, clearPath, clearGrid, runAlgorithm } from './helpers'
@@ -17,6 +16,16 @@ export default function PathfindingVisualiser() {
     const isVisualising = useRef(false);
     const [selectedCellType, setSelectedCellType] = useState("wall");
     const [selectedAlgorithm, setSelectedAlgorithm] = useState("Select Algorithm");
+
+    // Initial start and goal coords.
+    const startCell = useRef({
+        row: 5, 
+        col: 5,
+    });
+    const goalCell = useRef({
+        row: DEFAULT_HEIGHT - 5,
+        col: DEFAULT_WIDTH - 5,
+    });
 
     /* MOUSE EVENTS -------------------------------------------------------------------- */
 
@@ -38,12 +47,29 @@ export default function PathfindingVisualiser() {
     const toggleCellType = useCallback((row, col) => {
         setGrid((prevGrid) => {
             const newGrid = prevGrid.slice();
+            
+            // Only one start and goal cells should exist, so we remove the previous start/goal
+            // when updating their positions. 
+            if (selectedCellType === "start") {
+                console.log(`${startCell.current.row} ${startCell.current.col}`)
+                newGrid[startCell.current.row][startCell.current.col].cellType = undefined;
+            } else if (selectedCellType === "goal") {
+                newGrid[goalCell.current.row][goalCell.current.col].cellType = undefined;
+            }
+
             newGrid[row][col].cellType = selectedCellType;
             return newGrid;
         });
     }, [selectedCellType]);
 
-    const handleMouseDown = useCallback((e, row, col) => {
+
+    // ASYNC NOTE: We used an aync function since the toggleCellType could take some time to execute.
+    // We need to ensure the toggleCellType() function occurs before updating the refs for start
+    // and goal because we need to use the OLD values of those refs inside the toggleCellType()
+    // function.
+    //      Is there a better way? - IDK
+
+    const handleMouseDown = useCallback(async (e, row, col) => {
         if (isVisualising.current === true) {
             return
         }
@@ -51,12 +77,26 @@ export default function PathfindingVisualiser() {
         e.preventDefault() // Prevents default dragging.
         isMousePressed.current = true;
 
-        // Toggle the wall.
-        // const newGrid = toggleWall(grid, row, col);
-        // setGrid(newGrid);
-        toggleCellType(row, col);
+        // Toggle the cell type. We use await to ensure this function executes before the below code.
+        await toggleCellType(row, col);
 
-    }, [toggleCellType]);
+        // Update coords of where the new start/goal cell is, since we can only have 1 of each on
+        // the board at any given time.
+        if (selectedCellType === "start") {
+            // Update coords of start cell.
+            startCell.current = {
+                row,
+                col,
+            };
+        } else if (selectedCellType === "goal") {
+            // Update coords of goal cell.
+            goalCell.current = {
+                row,
+                col,
+            };
+        }
+
+    }, [toggleCellType, selectedCellType]);
 
     const handleMouseUp = useCallback(() => {
         isMousePressed.current = false;
@@ -98,18 +138,8 @@ export default function PathfindingVisualiser() {
         
         isVisualising.current = true;
 
-        let start = {
-            row: 5,
-            col: 5,
-        };
-
-        let goal = {
-            row: DEFAULT_HEIGHT - 5,
-            col: DEFAULT_WIDTH - 5,
-        };
-
         // For now we just run BFS.
-        const { visitedCellsInOrder, path } = runAlgorithm(selectedAlgorithm, grid, start, goal);
+        const { visitedCellsInOrder, path } = runAlgorithm(selectedAlgorithm, grid, startCell.current, goalCell.current);
 
         animateAlgorithm(visitedCellsInOrder, path);
 
@@ -128,9 +158,17 @@ export default function PathfindingVisualiser() {
             let currCell = visitedCellsInOrder[i];
             setTimeout(() => {
                 updateTraversalState(currCell, "visited");
+
+                // If we didn't find a path, then after all nodes are visited, we can edit the 
+                // board again.
+                if (i === visitedCellsInOrder.length - 1 && path.length === 0) {
+                    isVisualising.current = false;
+                }
             }, speed * i);
             delay += speed;
         }
+
+
 
         // Visualise the path after the nodes have been visited (hence why we delay it with setTimeout).
         setTimeout(() => {
@@ -184,7 +222,7 @@ export default function PathfindingVisualiser() {
             <Header />
 
             {/* Sidebar Section */}
-            <Sidebar handleChangeCellType={handleChangeCellType} />
+            <Sidebar handleChangeCellType={handleChangeCellType} selectedItem={selectedCellType} />
 
             <main>
                 {/* Top Description Section */}

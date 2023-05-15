@@ -142,7 +142,20 @@ body {
   filter: drop-shadow(0px 0px 3px #76efff);
 }
 
+.sidebar-item:active {
+  transform: translateY(3px);
+}
+
 .sidebar-item:hover svg {
+  fill: #76efff;
+}
+
+/* If the current item is selected. */
+.sidebar-item.selected {
+  filter: drop-shadow(0px 0px 3px #76efff);
+}
+
+.sidebar-item.selected svg {
   fill: #76efff;
 }
 
@@ -342,6 +355,10 @@ main {
   background-color: purple;
 }
 
+.cell.chest {
+  background-color: orange;
+}
+
 /* Clear Section */
 .clear-section {
   width: 100%;
@@ -400,4 +417,3 @@ main {
 }
 
 /* LARGE SCREENS */
-
