@@ -17,7 +17,7 @@ export const algoDescriptions = {
     "DFS": `An algorithm that traverses down an unweighted graph as far as possible before backtracking.`,
 
     "Dijkstra": `Searches a weighted graph, which prioritises which path to explore. Instead of exploring all 
-    node equally like BFS, we instead favour traversing to nodes that have a lower cost from the start cell.`,
+    nodes equally like BFS, we instead favour traversing to nodes that have a lower cost from the start cell.`,
 
     "Greedy Best First Search": `An informed search algorithm utilising a heauristic. Based on its heuristic function, it
     prioritises the next cell to visit based on the estimated (heuristic) distance it is from the goal.`,

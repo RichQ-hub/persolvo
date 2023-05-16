@@ -5,7 +5,15 @@ import Cell from '../cell/Cell';
 import DropdownButton from '../dropdown/DropdownButton';
 
 // Helpers
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, algoDescriptions, createGrid, clearPath, clearGrid, runAlgorithm } from './helpers'
+import { 
+    DEFAULT_HEIGHT, 
+    DEFAULT_WIDTH, 
+    algoDescriptions, 
+    createGrid, 
+    clearPath, 
+    clearGrid, 
+    runAlgorithm 
+} from './helpers'
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
@@ -171,8 +179,6 @@ export default function PathfindingVisualiser() {
             }, speed * i);
             delay += speed;
         }
-
-
 
         // Visualise the path after the nodes have been visited (hence why we delay it with setTimeout).
         setTimeout(() => {

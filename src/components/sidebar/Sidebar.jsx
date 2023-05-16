@@ -14,7 +14,7 @@ export default function Sidebar(props) {
 	const { handleChangeCellType, selectedItem } = props;
 	return (
 		<aside className='sidebar'>
-			<SidebarSection title="Eraser">
+			<SidebarSection title="Eraser" num="1">
 				<SidebarItem 
 					name="eraser" 
 					icon={<EraserIcon />}
@@ -23,7 +23,7 @@ export default function Sidebar(props) {
 				/>
 			</SidebarSection>
 
-			<SidebarSection title="Start / End">
+			<SidebarSection title="Start / End" num="2">
 				<SidebarItem 
 					name="start" 
 					icon={<StartIcon />} 
@@ -38,7 +38,7 @@ export default function Sidebar(props) {
 				/>
 			</SidebarSection>
 
-			<SidebarSection title="Cell Types">
+			<SidebarSection title="Cell Types" num="3">
 				<SidebarItem 
 					name="wall" 
 					icon={<WallIcon />}

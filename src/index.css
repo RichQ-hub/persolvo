@@ -73,12 +73,13 @@ body {
 }
 
 .github-logo {
+  fill: white;
   cursor: pointer;
   transition: fill ease-in-out 0.2s, transform ease-in-out 0.2s;
 }
 
 .github-logo:hover {
-  fill: white;
+  fill: gold;
   transform: scale(1.1);
 }
 

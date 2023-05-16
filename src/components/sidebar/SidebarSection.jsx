@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default function SidebarSection(props) {
-    const { title } = props;
+    const { title, num } = props;
     return (
-        <div className='sidebar-section'>
+        <div className={`sidebar-section-${num}`}>
             {/* Header */}
             <div className='sidebar-title-bar'>
                 <h2>{title}</h2>
