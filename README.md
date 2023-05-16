@@ -4,6 +4,8 @@
 
 See the live demo here - [Demo](https://richq-hub.github.io/Persolvo/)
 
+![Persolvo App](/src/assets/img/persolvo-website.png)
+
 ## Technologies Used
 
 | ReactJS | JavaScript | HTML5 | CSS3 |
@@ -15,12 +17,13 @@ See the live demo here - [Demo](https://richq-hub.github.io/Persolvo/)
 2. Depth-First Search (DFS).
 3. Dijkstra.
 4. Greedy Best First Search.
-5. A*
+5. A*.
 
 ## Future Ideas
 - Treasure chest that the algorithm must find first before finding the goal.
 - Tutorial that explains how to use the app.
 - Popup descriptions that explain what each item in the sidebar does.
+- Functionality to set the speed of the algorithm.
 
 ## Available Scripts - Create React App
 
