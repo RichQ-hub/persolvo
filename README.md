@@ -4,7 +4,7 @@
 
 See the live demo here - [Demo](https://richq-hub.github.io/Persolvo/)
 
-![Persolvo App](https://github.com/RichQ-hub/Persolvo/src/assets/img/persolvo-website.png?raw=true)
+![Persolvo App](https://github.com/RichQ-hub/Persolvo/blob/main/src/assets/img/persolvo-website.png?raw=true)
 
 ## Technologies Used
 
