@@ -1,8 +1,28 @@
-# Getting Started with Create React App
+# Persolvo - A Pathfinding Visualiser
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Heavily inspired by Clément Mihailescu's own pathfinding visualiser, this app served as an entry level gateway into practically applying what I've learnt with React, JavaScript, HTML and CSS all in one application.
 
-## Available Scripts
+See the live demo here - [Demo](https://richq-hub.github.io/Persolvo/)
+
+## Technologies Used
+
+| ReactJS | JavaScript | HTML5 | CSS3 |
+| ------- | ---------- | -------- | -------- |
+
+## Featured Algorithms
+
+1. Breadth-First Search (BFS).
+2. Depth-First Search (DFS).
+3. Dijkstra.
+4. Greedy Best First Search.
+5. A*
+
+## Future Ideas
+- Treasure chest that the algorithm must find first before finding the goal.
+- Tutorial that explains how to use the app.
+- Popup descriptions that explain what each item in the sidebar does.
+
+## Available Scripts - Create React App
 
 In the project directory, you can run:
 
