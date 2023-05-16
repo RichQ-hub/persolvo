@@ -5,7 +5,7 @@ import Cell from '../cell/Cell';
 import DropdownButton from '../dropdown/DropdownButton';
 
 // Helpers
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, createGrid, clearPath, clearGrid, runAlgorithm } from './helpers'
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH, algoDescriptions, createGrid, clearPath, clearGrid, runAlgorithm } from './helpers'
 
 // Icons.
 import {ReactComponent as PlayButton} from '../../assets/icons/play-solid.svg' 
@@ -100,7 +100,7 @@ export default function PathfindingVisualiser() {
         toggleCellType(row, col);
 
         // Update coords of where the new start/goal cell is, since we can only have 1 of each on
-        // the board at any given time.
+        // the board at any given time. - We do this inside the updater function above (toggleCellType).
 
     }, [toggleCellType]);
 
@@ -213,6 +213,7 @@ export default function PathfindingVisualiser() {
     /* OPTION EVENTS -------------------------------------------------------------------- */
 
     const handleChangeAlgorithm = (algorithm) => {
+        // Change the selected algorithm.
         setSelectedAlgorithm(algorithm);
     }
 
@@ -231,24 +232,15 @@ export default function PathfindingVisualiser() {
             <main>
                 {/* Top Description Section */}
                 <section className='algo-desc'>
-                    <div className='item-desc'>
-                        <h2>Item Selected</h2>
+                    <div className='algo-info'>
+                        <h2>{selectedAlgorithm}</h2>
                         <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nihil 
-                            nostrum veritatis aut, commodi facere saepe deleniti vero repellat 
+                            {algoDescriptions[selectedAlgorithm]}
                         </p>
                     </div>
                     <div className='divider'></div>
                     
                     {/* Algorithm Select Button */}
-
-                    {/* <div className='algo-select'>
-                        <button>
-                            <p>Algorithm</p>
-                        </button>
-                    </div> */}
-
-                    {/* New Algorithm Select Button */}
                     <DropdownButton selectedAlgorithm={selectedAlgorithm} handleChangeAlgorithm={handleChangeAlgorithm} />
 
                     {/* Play Button */}

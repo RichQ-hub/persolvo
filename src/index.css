@@ -179,13 +179,13 @@ main {
   width: 100%;
 }
 
-.item-desc {
+.algo-info {
   max-width: 50%;
   color: white;
   font-weight: 100;
 }
 
-.item-desc p {
+.algo-info p {
   font-size: 0.9rem;
 }
 

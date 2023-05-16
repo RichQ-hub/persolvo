@@ -8,9 +8,31 @@ import AStar from '../../lib/algorithms/AStar';
 export const DEFAULT_HEIGHT = 20;
 export const DEFAULT_WIDTH = 30;
 
+// Algorithm Descriptions.
+export const algoDescriptions = {
+    "BFS": `An algorithm that searches an unweighted graph or tree in a depth level manner. 
+    Starting at the start cell, the algorithm visits all cells in the current depth before 
+    moving onto the next.`,
+
+    "DFS": `An algorithm that traverses down an unweighted graph as far as possible before backtracking.`,
+
+    "Dijkstra": `Searches a weighted graph, which prioritises which path to explore. Instead of exploring all 
+    node equally like BFS, we instead favour traversing to nodes that have a lower cost from the start cell.`,
+
+    "Greedy Best First Search": `An informed search algorithm utilising a heauristic. Based on its heuristic function, it
+    prioritises the next cell to visit based on the estimated (heuristic) distance it is from the goal.`,
+
+    "A*": `An informed search algorithm that combines the benefits of both Greedy BFS and Dijkstra. It chooses paths/cells
+    based on its actual distance from the start and its estimated (heuristic) distance to the goal.`,
+}
+
 /**
  * Runs the given algorithm.
  * @param {string} algorithm 
+ * @param {array} grid 
+ * @param {object} start 
+ * @param {object} goal 
+ * @returns 
  */
 export const runAlgorithm = (algorithm, grid, start, goal) => {
     switch (algorithm) {
