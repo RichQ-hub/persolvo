@@ -7,7 +7,7 @@ export default function Header() {
 		<header className='header'>
 			<Logo className='logo'></Logo>
 			<h1>PERSOLVO</h1>
-			<a className='github-link' href="https://github.com/RichQ-hub/Persolvo" target='_blank'>
+			<a className='github-link' href="https://github.com/RichQ-hub/Persolvo" target='_blank' rel='noreferrer'>
 				<GithubLogo className='github-logo' />
 			</a>
 		</header>
