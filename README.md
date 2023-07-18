@@ -2,7 +2,7 @@
 
 > Heavily inspired by Clément Mihailescu's own pathfinding visualiser, this app served as an entry level gateway into practically applying what I've learnt with React, JavaScript, HTML and CSS all in one application.
 
-See the live demo here - [Demo](https://richq-hub.github.io/Persolvo/)
+See the live demo here (Hosted on Netlify) - [Demo](https://persolvo.netlify.app/)
 
 ![Persolvo App](https://github.com/RichQ-hub/Persolvo/blob/main/src/assets/img/persolvo-website.png?raw=true)
 
