@@ -26,7 +26,8 @@ export default function PriorityQueue() {
 
         let currentIdx = heap.length - 1; // Index of the newly inserted cell (which is at the end of the heap).
 
-        // Traverse upwards until the newCell's priority is less than its parent.
+        // Traverse upwards until the newCell's priority is greater than its parent (until the
+        // heap property is satisfied).
         while (currentIdx > 1 && heap[Math.floor(currentIdx / 2)].priority > heap[currentIdx].priority) {
             // Swap the current cell and it's parent (using destructuring).
             [heap[Math.floor(currentIdx / 2)], heap[currentIdx]] = [heap[currentIdx], heap[Math.floor(currentIdx / 2)]];
@@ -65,7 +66,8 @@ export default function PriorityQueue() {
 
             let smallestChildIdx = leftChildIdx;
 
-            // Choose the smallest child.
+            // Choose the smallest child. The condition (leftChildIdx < heap.length - 1) determines
+            // if there exists a right child if TRUE.
             if (leftChildIdx < heap.length - 1 && heap[leftChildIdx].priority > heap[rightChildIdx].priority) {
                 smallestChildIdx = rightChildIdx;
             }
